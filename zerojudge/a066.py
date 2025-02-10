@@ -1,25 +1,21 @@
-n,m,l,q=map(int,input().split(" "))
+n = int(input())  # Read number of days
+revenues = []
+dp = []  # dp[i] will store the minimum revenue seen up to day i
 
-badcompanies=set()
-link=[[].copy() for _ in range(n)]
+# Read daily revenues
+for _ in range(n):
+    revenues.append(int(input()))
 
-for _ in range(m):
-	a,b=map(int,input().split(" "))
-	link[a-1].append(b-1)
+# First day's fluctuation is equal to its revenue
+total_fluctuation = revenues[0]
 
-for _ in range(l):
-	bad=int(input())-1
-	if bad not in badcompanies:
-		dos={bad}
-		while len(dos)>0:
-			doing=dos.pop()
-			if doing not in badcompanies:
-				badcompanies.add(doing)
-				dos.update(link[doing])
+# For each subsequent day
+for i in range(1, n):
+    # Find minimum fluctuation by comparing with all previous days
+    min_fluctuation = abs(revenues[i] - revenues[0])
+    for j in range(1, i):
+        current_fluctuation = abs(revenues[i] - revenues[j])
+        min_fluctuation = min(min_fluctuation, current_fluctuation)
+    total_fluctuation += min_fluctuation
 
-for _ in range(q):
-	ask=int(input())-1
-	if ask in badcompanies:
-		print("TUIHUOOOOOO")
-	else:
-		print("YA~~")
+print(total_fluctuation)

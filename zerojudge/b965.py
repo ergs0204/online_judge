@@ -1,29 +1,34 @@
+def rotate(matrix):
+    # 順時針旋轉90度
+    R = len(matrix)
+    C = len(matrix[0])
+    result = [[0] * R for _ in range(C)]
+    for i in range(R):
+        for j in range(C):
+            result[j][R-1-i] = matrix[i][j]
+    return result
+
 def flip(matrix):
+    # 上下翻轉
     return matrix[::-1]
 
-def rotate(matrix):
-    return list(zip(*matrix[::-1]))
-
-def transform(matrix, operations):
-    for operation in operations:
-        if operation == 0:
-            matrix = rotate(matrix)
-        else:
-            matrix = flip(matrix)
-    return matrix
-
+# 讀取輸入
 R, C, M = map(int, input().split())
-matrix_B = [list(map(int, input().split())) for _ in range(R)]
+matrix_B = []
+for _ in range(R):
+    row = list(map(int, input().split()))
+    matrix_B.append(row)
 operations = list(map(int, input().split()))
 
-# Apply the inverse operations in reverse order
-inverse_operations = operations[::-1]
-for i in range(len(inverse_operations)):
-    inverse_operations[i] = 1 - inverse_operations[i]
+# 反向執行操作以得到矩陣A
+matrix = matrix_B
+for op in operations[::-1]:
+    if op == 0:  # 旋轉的反操作是逆時針旋轉3次
+        matrix = rotate(rotate(rotate(matrix)))
+    else:  # 翻轉的反操作還是翻轉
+        matrix = flip(matrix)
 
-matrix_A = transform(matrix_B, inverse_operations)
-
-# Output the result
-print(len(matrix_A), len(matrix_A[0]))
-for row in matrix_A:
+# 輸出結果
+print(len(matrix), len(matrix[0]))
+for i, row in enumerate(matrix):
     print(' '.join(map(str, row)))

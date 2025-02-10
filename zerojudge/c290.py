@@ -12,6 +12,7 @@ def secret_difference(x):
     # Calculate the absolute difference
     return abs(sum_odd - sum_even)
 
+
 # Read the input number
 x = input()
 

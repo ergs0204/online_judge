@@ -16,6 +16,7 @@ def iterative_dfs(graph, start):
 
     return max_depth, max_node
 
+
 # Read the input
 N = int(input())
 graph = [[] for _ in range(N)]

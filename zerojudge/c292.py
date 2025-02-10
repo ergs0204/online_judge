@@ -29,10 +29,11 @@ def spiral_traversal(matrix, start_direction):
 
     return result
 
+
 # Read the input
 N = int(input())
 start_direction = int(input())
 matrix = [list(map(int, input().split())) for _ in range(N)]
 
 # Perform the spiral traversal and output the result
-print(''.join(map(str, spiral_traversal(matrix, start_direction))))
+print("".join(map(str, spiral_traversal(matrix, start_direction))))

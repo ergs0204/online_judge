@@ -16,12 +16,14 @@ def convolution(image, kernel, H, W, N, M):
 # Read input
 H, W, N, M = map(int, input().split())
 image = [list(map(int, input().split())) for _ in range(H)]
+# for _ in range(H):
+#     image.append(list(map(int,input().split(" "))))
 kernel = [list(map(int, input().split())) for _ in range(N)]
-kernel=kernel[::-1]
+kernel = kernel[::-1]
 for i in range(N):
-    kernel[i]=kernel[i][::-1]
+    kernel[i] = kernel[i][::-1]
 # Perform convolution
 result = convolution(image, kernel, H, W, N, M)
 # Print result
 for row in result:
-    print(' '.join(map(str, row)))
+    print(" ".join(map(str, row)))
